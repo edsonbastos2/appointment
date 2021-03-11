@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 mongoose.connect('mongodb://localhost:27017/agendamento', { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.render('index');
 })
 
 app.get('/agendamento', (req, res) => {
@@ -35,6 +35,11 @@ app.post('/create', async (req, res) => {
     } else {
         res.send('Ocorreu um error !')
     }
+});
+
+app.get('/getcalendar', async (req, res) => {
+    let consultas = await appointment.GetAll(false)
+    res.json(consultas)
 })
 
 
